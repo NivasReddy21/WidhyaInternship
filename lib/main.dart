@@ -1,24 +1,17 @@
 import 'package:flutter/material.dart';
+import 'package:widhya/services/loading.dart';
+import 'package:widhya/widgets/MiddleContainer/middleColumn.dart';
 import 'package:widhya/widgets/navigation.dart';
 import 'package:widhya/widgets/leftContainer/leftColumn.dart';
+import 'package:widhya/widgets/rightContainer/rightColumn.dart';
 
 void main() {
-  runApp(MyApp());
-}
-
-class MyApp extends StatelessWidget {
-  // This widget is the root of your application.
-  @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      theme: ThemeData(
-        primarySwatch: Colors.blue,
-        visualDensity: VisualDensity.adaptivePlatformDensity,
-      ),
-      home: MyHomePage(),
-      debugShowCheckedModeBanner: false,
-    );
-  }
+  runApp(MaterialApp(
+    routes: {
+      '/': (context) => LoadingScreen(),
+      '/homePage': (context) => MyHomePage()
+    },
+  ));
 }
 
 class MyHomePage extends StatefulWidget {
@@ -32,15 +25,13 @@ class _MyHomePageState extends State<MyHomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.grey[200],
+      backgroundColor: Colors.orange[50],
       body: SafeArea(
         child: Column(
           children: [
             NavigationBar(),
             Row(
-              children: [
-                LeftColumn(),
-              ],
+              children: [LeftColumn(), MiddleContainer(), RightColumn()],
             )
           ],
         ),
