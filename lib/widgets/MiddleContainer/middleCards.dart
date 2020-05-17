@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:like_button/like_button.dart';
 import 'package:widhya/widgets/postWidget.dart';
 
-Widget middleCards1({story, imageUrl, user, userUrl}) {
+Widget middleCards1(List postData, int i) {
   return Container(
     height: 570,
     width: 590,
@@ -34,7 +34,7 @@ Widget middleCards1({story, imageUrl, user, userUrl}) {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      'Dribbble',
+                      '${postData[i]['title']}',
                       style: TextStyle(
                         fontSize: 15,
                         fontWeight: FontWeight.bold,
@@ -51,8 +51,7 @@ Widget middleCards1({story, imageUrl, user, userUrl}) {
           ),
           Container(
             padding: EdgeInsets.fromLTRB(15, 30, 10, 10),
-            child: Text(
-                'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.'),
+            child: Text('${postData[i]['description']}'),
           ),
           Container(
             width: 750,
@@ -62,7 +61,7 @@ Widget middleCards1({story, imageUrl, user, userUrl}) {
                 Radius.circular(20),
               ),
               child: Image.network(
-                'data:image/png;base64,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',
+                '${postData[i]['url']}',
                 fit: BoxFit.fitWidth,
               ),
             ),
@@ -130,4 +129,11 @@ Widget middleCards1({story, imageUrl, user, userUrl}) {
   );
 }
 
-final middleCards = [middleCards1(), PostWidget()];
+List<Widget> middleFunc(List postData) {
+  List<Widget> postCards = [];
+  postCards.add(PostWidget());
+  for (int i = 0; i < postData.length; i++) {
+    postCards.add(middleCards1(postData, i));
+  }
+  return postCards;
+}

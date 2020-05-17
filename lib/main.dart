@@ -22,8 +22,12 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
+  Map postDataObj;
+  List postData;
   @override
   Widget build(BuildContext context) {
+    postDataObj = ModalRoute.of(context).settings.arguments;
+    postData = postDataObj['postData'];
     return Scaffold(
       backgroundColor: Colors.orange[50],
       body: SafeArea(
@@ -31,7 +35,13 @@ class _MyHomePageState extends State<MyHomePage> {
           children: [
             NavigationBar(),
             Row(
-              children: [LeftColumn(), MiddleContainer(), RightColumn()],
+              children: [
+                LeftColumn(),
+                MiddleContainer(
+                  postData: postData,
+                ),
+                RightColumn()
+              ],
             )
           ],
         ),
